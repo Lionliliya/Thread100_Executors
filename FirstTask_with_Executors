@@ -1,0 +1,33 @@
+package oop6;
+import java.util.concurrent.*;
+
+public class Thread100WithExcecut implements Runnable {
+	private int numb;
+	
+	public Thread100WithExcecut(int numb) {
+		super();
+		this.numb = numb;
+	}
+	long fact=1;
+	@Override
+	public void run() {
+		/**if (numb==1) {
+			System.out.println("Thread # "+numb+" factorial = 1");
+		} else { **/
+		for (int i=1;i<=this.numb; i++){
+			fact=fact*i;
+		}
+		
+		System.out.println("Thread # "+numb+" factorial of "+numb+"! = "+String.valueOf(fact));
+		
+	}
+	public static void main(String [] args) {
+		ExecutorService myexec = Executors.newSingleThreadExecutor();
+		for (int i = 1; i<=100; i++) {
+			myexec.execute(new Thread100WithExcecut(i));
+		}
+		myexec.shutdown();
+		
+	}
+
+}
